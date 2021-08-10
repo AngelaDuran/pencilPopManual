@@ -60,8 +60,8 @@ class SceneMain extends Phaser.Scene {
 
     buttonPressed(params){
         console.log(params);
-        emitter.emit(G.PLAY_SOUND,'cat');
-        //this.scene.start("SceneOver");
+        var switched = !model.musicOn;
+        model.musicOn = switched;
     }
 
     update() {

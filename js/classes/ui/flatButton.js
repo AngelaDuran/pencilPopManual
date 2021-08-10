@@ -58,7 +58,8 @@ class FlatButton extends Phaser.GameObjects.Container{
 
     pressed(){
         if (this.config.params){
-            emitter.emit(this.config.event, this.config.params);
+            //not sure why this is an issue!!! (8/9 --> Media Manager (3))
+            //emitter.emit(this.config.event, this.config.params);
         }
         emitter.emit(this.config.event);
     }
