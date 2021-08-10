@@ -25,7 +25,7 @@ class AlignGrid{
         //cell height
         this.ch=config.height/config.rows;
     }
-    show(){
+    show(){ //displays lines
         this.graphics=this.scene.add.graphics();
         this.graphics.lineStyle(2, 0xff0000);
 
@@ -59,7 +59,7 @@ class AlignGrid{
         this.placeAt(xx,yy, obj);
     }
 
-    showNumbers(){
+    showNumbers(){ //displays coordinates
         var count = 0;
         for(var i = 0; i < this.config.rows; i ++){
             for(var j = 0; j < this.config.cols; j ++){

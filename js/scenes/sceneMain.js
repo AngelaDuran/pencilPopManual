@@ -7,13 +7,13 @@ class SceneMain extends Phaser.Scene {
     	//load our images or sounds 
         this.load.image('bee', 'images/bee.png');
         this.load.image('button1', 'images/ui/buttons/2/1.png');
-         this.load.image('button2', 'images/ui/buttons/2/3.png');
+        this.load.image('button2', 'images/ui/buttons/2/3.png');
     }
     create() {
        //define our objects
        //score stuff
-       emitter = new Phaser.Events.EventEmitter();  //should be first in create
-       controller = new Controller();
+       //emitter = new Phaser.Events.EventEmitter();  //should be first in create
+       //controller = new Controller();
 
        this.sb=new ScoreBox({scene:this});
        this.sb.x=game.config.width/2;
