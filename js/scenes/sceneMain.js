@@ -8,13 +8,21 @@ class SceneMain extends Phaser.Scene {
         this.load.image('bee', 'images/bee.png');
         this.load.image('button1', 'images/ui/buttons/2/1.png');
         this.load.image('button2', 'images/ui/buttons/2/3.png');
+        this.load.audio('cat', ['audio/meow.mp3', 'audio/meow.ogg']);
+        this.load.audio('backgroundMusic', ['audio/background.mp3', 'audio/background.ogg']);
     }
     create() {
        //define our objects
-       //score stuff
+
        //emitter = new Phaser.Events.EventEmitter();  //should be first in create
        //controller = new Controller();
 
+       //media stuff
+       var mediaManager = new MediaManager({scene:this});
+       mediaManager.setBackgroundMusic('backgroundMusic');
+    
+
+       //score stuff
        this.sb=new ScoreBox({scene:this});
        this.sb.x=game.config.width/2;
        this.sb.y=50;
@@ -52,6 +60,8 @@ class SceneMain extends Phaser.Scene {
 
     buttonPressed(params){
         console.log(params);
+        emitter.emit(G.PLAY_SOUND,'cat');
+        //this.scene.start("SceneOver");
     }
 
     update() {

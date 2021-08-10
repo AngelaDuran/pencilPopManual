@@ -43,6 +43,17 @@ class FlatButton extends Phaser.GameObjects.Container{
 
         }
 
+        //button rollover
+        this.back.on('pointerover', this.over,this);
+        this.back.on('pointerout', this.out,this);
+
+    }
+
+    over(){
+        this.y-=5;
+    }
+    out(){
+        this.y+=5;
     }
 
     pressed(){

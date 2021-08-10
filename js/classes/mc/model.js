@@ -1,6 +1,9 @@
 class Model{
     constructor(){
-        this._score=0;   
+        this._score=0;  
+        this.soundOn=true; 
+        this.musicOn=true;
+
     }
 
     set score(val){
@@ -12,4 +15,5 @@ class Model{
     get score(){
         return this._score;
     }
+
 }
