@@ -1,7 +1,6 @@
 class SceneMain extends Phaser.Scene {
     constructor() {
         super('SceneMain');
-        //this.words = ["Potato", "Mango", "Cat"];
     }
     preload()
     {
@@ -11,75 +10,26 @@ class SceneMain extends Phaser.Scene {
         this.load.image('balloon', 'images/balloonG.png');
         this.load.image('background', 'images/sky.jpg');
 
+        this.load.image('V0', 'images/vocab balloons/V0.png');
+        this.load.image('V1', 'images/vocab balloons/V1.png');
+        this.load.image('V2', 'images/vocab balloons/V2.png');
+        this.load.image('V3', 'images/vocab balloons/V3.png');
+        this.load.image('V4', 'images/vocab balloons/V4.png');
+
         this.load.image('button1', 'images/ui/buttons/2/1.png');
         this.load.image('button2', 'images/ui/buttons/2/3.png');
         //this.load.audio('cat', ['audio/meow.mp3', 'audio/meow.ogg']);
         //this.load.audio('backgroundMusic', ['audio/background.mp3', 'audio/background.ogg']);
 
-        this.load.image('toggleBack', 'images/ui/toggles/1.png');
-        this.load.image('sfxOff', 'images/ui/icons/sfx_off.png');
-        this.load.image('sfxOn', 'images/ui/icons/sfx_on.png');
-        this.load.image('musicOff', 'images/ui/icons/music_off.png');
-        this.load.image('musicOn', 'images/ui/icons/music_on.png');
-        
     }
     create() {
         this.background=this.add.image(0,0,'background');
         this.background.setOrigin(0,0);
-        /*
-
-       //toggle button stuff
-       var toggleBUtton = new ToggleButton({scene:this, backKey:'toggleBack', onIcon:'musicOn', offIcon:'musicOff', event:G.TOGGLE_MUSIC, x:240, y:500});
-
-       //media stuff
-       var mediaManager = new MediaManager({scene:this});
-       mediaManager.setBackgroundMusic('backgroundMusic');
-    
-
-       //score stuff
-       this.sb=new ScoreBox({scene:this});
-       this.sb.x=game.config.width/2;
-       this.sb.y=50;
-
-       model.score = 100;
-       console.log("Ready!");
-
-
-       //grid stuff
-       /*
-       var gridConfig={rows:5, cols:5, scene:this};
-       var alignGrid=new AlignGrid(gridConfig);
-       alignGrid.show();
-
-       //var bee = this.add.image(0,0,'bee');
-       //Align.center(bee);
-
-       //placing image in grid
-       alignGrid.showNumbers();
-       this.bee=this.add.sprite(0,0,'bee');
-       //this.bee.setOrigin(0.5, 0.5);
-       //alignGrid.placeAt(2,2,this.bee);
-       alignGrid.placeAtIndex(7, this.bee);
-       // ** add back later
-
-       //button stuff
-       var fireText ={color:'black', fontSize:30};
-       var flatButton = new FlatButton({scene: this, key: 'button1', text: 'Fire!', x:game.config.width/2, y:200, event:'button_pressed', params:'fire_lasers', textConfig:fireText});
-       var flatButton2 = new FlatButton({scene: this, key: 'button2', text: 'Destruct!', x:240, y:400, event:'button_pressed', params: 'self_destruct'});
-
-        emitter.on('button_pressed', this.buttonPressed,this);
-        */
+        
         emitter = new Phaser.Events.EventEmitter();  //should be first in create
         controller = new Controller();
 
-        
-        var mediaManager = new MediaManager({scene:this});
-        var sb = new SoundButtons({scene:this});
-        /*
-        //Progress bar?
-        var bar = new Bar({scene:this, x:240, y:320});
-        //bar.setPercent(.5);
-        */
+
 
         //CODING THE PENCIL POP GAME 8/10
         var gridConfig={rows:8, cols:10, scene:this};
@@ -88,107 +38,101 @@ class SceneMain extends Phaser.Scene {
         //alignGrid.showNumbers();
 
         
-        var words = ["cat", "mango", "avocado"];
-        
-        //THIS WORKS (Word in Ballon - singular)
+        var words = ["cat", "mango", "avocado", "Santi", "Angela"];
+        var definitions = ["A cute animal", "Sweet, exotic fruit", "Green fruit with a pit", "The bear", "The Grizz" ];
+
+        console.log(curVocab);
+
+        //Text format referance
         /*
-        var balloonGroup = this.add.group();
-        this.balloon = this.physics.add.sprite(100, 100, 'balloon');
-        this.balloon.setScale(.3);
-        balloonGroup.add(this.balloon);
-        this.text1 = this.add.text(100, 100, words[1]);
-        this.text1.setOrigin(0.5,0.5);
+        //this.changeDef(definitions);
+        var textD = this.add.text(50, 300, "Def GLOBAL", {color : '#f7fc53'});
+        //textD.destroy();
+        textD = this.change(textD, definitions);
         */
-        var balloonGroup = this.add.group();
-        this.balloon = this.physics.add.sprite(100, 100, 'balloon');
-        this.balloon.setScale(.3);
-        balloonGroup.add(this.balloon);
-        this.text1 = this.add.text(100, 100, words[1]);
-        this.text1.setOrigin(0.5,0.5);
+    
 
+        //want random numbers for velocity set
 
-        
-        
-       /*
-        var balloonGroup=this.add.group();
-        for (var i = 0; i <= 10; i++){
-            var rng = Phaser.Math.Between(0,69);
-            var balloon = this.physics.add.sprite(0, 0, 'balloon');
-            balloon.setScale(.3);
-            alignGrid.placeAtIndex(rng, balloon);
-            balloonGroup.add(balloon);
-        }*/
-        
+        this.balloon0 = this.physics.add.sprite(100,200, 'V0');
+        this.balloon0.setScale(.3);
+        this.balloon0.body.setVelocity(50, 200);
+        this.balloon0.setCollideWorldBounds(true);
+        this.balloon0.setBounce(1, 1);
+        this.balloon0.setName(words[0]);
 
+        this.balloon1 = this.physics.add.sprite(150,200, 'V1');
+        this.balloon1.setScale(.3);
+        this.balloon1.body.setVelocity(70, 100);
+        this.balloon1.setCollideWorldBounds(true);
+        this.balloon1.setBounce(1, 1);
+        this.balloon1.setName(words[1]);
 
-        //console.log("this.text1 " + this.text1);
-        //this.text1.destroy();
+        this.balloon2 = this.physics.add.sprite(200,200, 'V2');
+        this.balloon2.setScale(.3);
+        this.balloon2.body.setVelocity(100, 100);
+        this.balloon2.setCollideWorldBounds(true);
+        this.balloon2.setBounce(1, 1);
+        this.balloon2.setName(words[2]);
+
+        this.balloon3 = this.physics.add.sprite(250,200, 'V3');
+        this.balloon3.setScale(.3);
+        this.balloon3.body.setVelocity(150, 80);
+        this.balloon3.setCollideWorldBounds(true);
+        this.balloon3.setBounce(1, 1);
+        this.balloon3.setName(words[3]);
+
+        this.balloon4 = this.physics.add.sprite(300,200, 'V4');
+        this.balloon4.setScale(.3);
+        this.balloon4.body.setVelocity(80, 90);
+        this.balloon4.setCollideWorldBounds(true);
+        this.balloon4.setBounce(1, 1);
+        this.balloon4.setName(words[4]);
 
 
         this.pencil = this.physics.add.sprite(300,600, 'pencil');
-        //this.pencil.displayWidth=50;
-        //this.pencil.scaleY=this.pencil.scaleX;
         this.pencil.setScale(.3);
         this.pencil.body.drag.set(250);
         this.pencil.body.maxVelocity.set(200);
         this.pencil.setCollideWorldBounds(true);
-        //this.pencil.body.colliderWorldBounds = true;
-
-        this.bee = this.physics.add.sprite(300, 200, 'bee');
-
-        //groups?
-        this.balloonGroup= this.physics.add.group({
-            key: 'balloon',
-            //frame: [0,1,2],
-            frameQuantity: 10,
-            bounceX: 1,
-            bounceY: 1,
-            //angularVelocity: 1,
-            collideWorldBounds: true
-        });
-        this.balloonGroup.children.iterate(function(child){
-            var xx = Math.floor(Math.random() * this.background.displayWidth);
-            var yy = Math.floor(Math.random() * this.background.displayHeight);
-
-            child.x = xx;
-            child.y = yy;
-            child.setScale(.3);
-            //AlignGrid.scaleToGameW(child.image,.3);
-            var vx = Math.floor(Math.random()*2)-1;
-            var vy = Math.floor(Math.random()*2)-1;
-            if(vx == 0 && vy == 0){
-                vx=1;
-                vy=1;
-            }
-            console.log("CODE UPDATED 11:00am");
-
-            var speed = Math.floor(Math.random()*100)+10;
-            child.body.setVelocity(vx*speed, vy*speed);
-        }.bind(this));
-
-        this.physics.add.collider(this.balloonGroup);
-
-        this.physics.add.collider(this.pencil, this.balloonGroup,this.destroyBalloon, null, this);
-
-        this.physics.add.collider(this.pencil, this.bee, function(pencil, bee){
-            bee.destroy();
-            
-        });
-
         
-        this.physics.add.collider(this.pencil, this.balloon, function(pencil, balloon){
-            balloon.destroy();
-            this.text1.destroy();
-        }.bind(this));
+        var arr = [this.balloon0, this.balloon1, this.balloon2, this.balloon3, this.balloon4];
+
+        /*
+        for(var i = 0; i <= 4; i++){
+            this.physics.add.collider(this.pencil, arr[i], function(pencil, balloon){
+                if (balloon.name == "jeff") { //change it to be cur def
+                    balloon.destroy();
+                  }
+                else { //reset location if incorrect
+                    this.balloon.setX(10);
+                    this.balloon.setY(20);
+                  }
+            }.bind(this));
+        }*/
+
+
+        //Balloon pop mechanics
+        var balloonBin = [this.balloon0,this.balloon1, this.balloon2,this.balloon3, this.balloon4];
+        
+        for(var i = 0; i <= 4; i++ ){
+            this.physics.add.collider(this.pencil, balloonBin[i], function(pencil, balloon){
+                if (balloon.name == curVocab) { //change it to be cur def
+                    balloon.destroy();
+                }
+                else { //reset location if incorrect
+                    balloon.setX(Phaser.Math.Between(20, 750));
+                    balloon.setY(Phaser.Math.Between(20, 600));
+                }
+            }.bind(this));
+        }
+
+       
         
 
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
-    }
-
-    destroyBalloon(pencil, balloon){
-        balloon.destroy();
     }
 
 
@@ -215,6 +159,9 @@ class SceneMain extends Phaser.Scene {
         else {
           this.pencil.body.acceleration.set(0);
         }
+
+        //console.log(this.curWord);
+
     }
     //can put custom functions after (TEST)
 

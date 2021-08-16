@@ -3,6 +3,7 @@ var model;
 var emitter;
 var G;
 var controller;
+var curVocab;
 
 window.onload=function()
 {
@@ -22,5 +23,6 @@ window.onload=function()
     G = new Constants();
     model = new Model();
     game = new Phaser.Game(config);
+    curVocab = "curVocab";
 
 }
