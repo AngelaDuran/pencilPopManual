@@ -29,8 +29,6 @@ class SceneMain extends Phaser.Scene {
         emitter = new Phaser.Events.EventEmitter();  //should be first in create
         controller = new Controller();
 
-
-
         //CODING THE PENCIL POP GAME 8/10
         var gridConfig={rows:8, cols:10, scene:this};
         var alignGrid=new AlignGrid(gridConfig);
@@ -38,10 +36,12 @@ class SceneMain extends Phaser.Scene {
         //alignGrid.showNumbers();
 
         
-        var words = ["cat", "mango", "avocado", "Santi", "Angela"];
-        var definitions = ["A cute animal", "Sweet, exotic fruit", "Green fruit with a pit", "The bear", "The Grizz" ];
+        //var words = ["cat", "mango", "avocado", "Santi", "Angela"];
+        //var definitions = ["A cute animal", "Sweet, exotic fruit", "Green fruit with a pit", "The bear", "The Grizz"];//add one more for loop
 
-        console.log(curVocab);
+        var textD = this.add.text(50, 500, "Def GLOBAL", {color : '#f2ed57'});
+        textD = this.change(textD);
+
 
         //Text format referance
         /*
@@ -118,6 +118,8 @@ class SceneMain extends Phaser.Scene {
         for(var i = 0; i <= 4; i++ ){
             this.physics.add.collider(this.pencil, balloonBin[i], function(pencil, balloon){
                 if (balloon.name == curVocab) { //change it to be cur def
+                    textD = this.change(textD);
+                    console.log(this.textD);
                     balloon.destroy();
                 }
                 else { //reset location if incorrect
@@ -127,13 +129,49 @@ class SceneMain extends Phaser.Scene {
             }.bind(this));
         }
 
-       
         
 
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
     }
+    change(textD){
+
+        textD.destroy();
+        var rand = Phaser.Math.Between(0, 4);
+        while(definitions[rand] == ""){
+            rand = Phaser.Math.Between(0, 4);
+            console.log("Random Num Update");
+        }
+        console.log("Rand: " + rand);
+
+        
+        curVocab = words[rand];
+        var wordHolder = definitions[rand];
+        definitions[rand] = "";
+        for(var i = 0; i <=3 ; i ++){
+            console.log(definitions[i]+ " ");
+        }
+
+        return (this.add.text(50,500, "UPDATED: " + wordHolder, {color: '#f2ed57'}));
+    }
+    /*
+    change(textD, def, words){
+        textD.destroy();
+
+        var rand = Phaser.Math.Between(0, 4);
+        console.log("Rand: " + rand);
+        while(def[rand] == ""){
+            rand = Phaeser.Math.Between(0, 4);
+        }
+        console.log(def[rand]);
+        
+        curVocab = words[rand];
+        var wordHolder = def[rand];
+        def[rand] = "";
+
+        return (this.add.text(50,500, "UPDATED: " + wordHolder, {color: '#f2ed57'}));
+    }*/
 
 
 /*

@@ -4,6 +4,8 @@ var emitter;
 var G;
 var controller;
 var curVocab;
+var words;
+var definitions;
 
 window.onload=function()
 {
@@ -24,5 +26,7 @@ window.onload=function()
     model = new Model();
     game = new Phaser.Game(config);
     curVocab = "curVocab";
+    words = ["cat", "mango", "avocado", "Santi", "Angela"];
+    definitions = ["A cute animal", "Sweet, exotic fruit", "Green fruit with a pit", "The bear", "The Grizz"];
 
 }
