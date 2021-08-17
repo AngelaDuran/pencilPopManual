@@ -39,8 +39,11 @@ class SceneMain extends Phaser.Scene {
         //var words = ["cat", "mango", "avocado", "Santi", "Angela"];
         //var definitions = ["A cute animal", "Sweet, exotic fruit", "Green fruit with a pit", "The bear", "The Grizz"];//add one more for loop
 
-        var textD = this.add.text(50, 500, "Def GLOBAL", {color : '#f2ed57'});
-        textD = this.change(textD);
+        
+        //Intiial word display setup
+        var textD = this.add.text(50, 500, definitions[curIndex], {color : '#f2ed57'});
+        curVocab = words[curIndex];
+        //textD = this.change(textD);
 
 
         //Text format referance
@@ -129,12 +132,14 @@ class SceneMain extends Phaser.Scene {
             }.bind(this));
         }
 
+
         
 
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
     }
+    /*
     change(textD){
 
         textD.destroy();
@@ -143,35 +148,41 @@ class SceneMain extends Phaser.Scene {
             rand = Phaser.Math.Between(0, 4);
             console.log("Random Num Update");
         }
-        console.log("Rand: " + rand);
 
         
         curVocab = words[rand];
         var wordHolder = definitions[rand];
         definitions[rand] = "";
-        for(var i = 0; i <=3 ; i ++){
+        for(var i = 0; i <=5 ; i ++){
+            console.log("I =  " + i);
             console.log(definitions[i]+ " ");
         }
 
         return (this.add.text(50,500, "UPDATED: " + wordHolder, {color: '#f2ed57'}));
-    }
-    /*
-    change(textD, def, words){
-        textD.destroy();
-
-        var rand = Phaser.Math.Between(0, 4);
-        console.log("Rand: " + rand);
-        while(def[rand] == ""){
-            rand = Phaeser.Math.Between(0, 4);
-        }
-        console.log(def[rand]);
-        
-        curVocab = words[rand];
-        var wordHolder = def[rand];
-        def[rand] = "";
-
-        return (this.add.text(50,500, "UPDATED: " + wordHolder, {color: '#f2ed57'}));
     }*/
+
+    change(textD){
+
+        textD.destroy();
+        definitions[curIndex] = "";
+        var counter = 0; //escape loop if array is empty
+
+        while(definitions[curIndex] == "" && counter < 5){
+            curIndex = Phaser.Math.Between(0, 4);
+            console.log("Random Num Update To: " + curIndex);
+            counter ++;
+        }
+
+        if (counter < 5){
+        curVocab = words[curIndex];
+        }
+        else{ //all words used
+            curVocab = "";
+        }
+
+
+        return (this.add.text(50,500, "UPDATED: " + definitions[curIndex], {color: '#f2ed57'}));
+    }
 
 
 /*

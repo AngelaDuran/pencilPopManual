@@ -6,6 +6,7 @@ var controller;
 var curVocab;
 var words;
 var definitions;
+var curIndex;
 
 window.onload=function()
 {
@@ -28,5 +29,6 @@ window.onload=function()
     curVocab = "curVocab";
     words = ["cat", "mango", "avocado", "Santi", "Angela"];
     definitions = ["A cute animal", "Sweet, exotic fruit", "Green fruit with a pit", "The bear", "The Grizz"];
+    curIndex = Phaser.Math.Between(0, 4);
 
 }
