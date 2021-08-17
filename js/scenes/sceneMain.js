@@ -41,9 +41,9 @@ class SceneMain extends Phaser.Scene {
 
         
         //Intiial word display setup
-        var textD = this.add.text(50, 500, definitions[curIndex], {color : '#f2ed57'});
+        var textD = this.add.text(50, 550, definitions[curIndex], {fontFamily: "Doppio One", color : '#000000'});
+        textD.setScale(1.2);
         curVocab = words[curIndex];
-        //textD = this.change(textD);
 
 
         //Text format referance
@@ -139,27 +139,7 @@ class SceneMain extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
 
     }
-    /*
-    change(textD){
 
-        textD.destroy();
-        var rand = Phaser.Math.Between(0, 4);
-        while(definitions[rand] == ""){
-            rand = Phaser.Math.Between(0, 4);
-            console.log("Random Num Update");
-        }
-
-        
-        curVocab = words[rand];
-        var wordHolder = definitions[rand];
-        definitions[rand] = "";
-        for(var i = 0; i <=5 ; i ++){
-            console.log("I =  " + i);
-            console.log(definitions[i]+ " ");
-        }
-
-        return (this.add.text(50,500, "UPDATED: " + wordHolder, {color: '#f2ed57'}));
-    }*/
 
     change(textD){
 
@@ -180,8 +160,10 @@ class SceneMain extends Phaser.Scene {
             curVocab = "";
         }
 
+        var textHolder = this.add.text(50,550, "UPDATED: " + definitions[curIndex], {fontFamily: "Doppio One", color: '#000000'})
+        textHolder.setScale(1.2);
 
-        return (this.add.text(50,500, "UPDATED: " + definitions[curIndex], {color: '#f2ed57'}));
+        return (textHolder);
     }
 
 
