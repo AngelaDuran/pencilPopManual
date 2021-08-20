@@ -6,15 +6,21 @@ class SceneMain extends Phaser.Scene {
     {
     	//load our images or sounds 
         this.load.image('bee', 'images/bee.png');
-        this.load.image('pencil', 'images/pencil128.png');
+        this.load.image('pencil', 'images/pencilOutlined.png');
         this.load.image('balloon', 'images/balloonG.png');
         this.load.image('background', 'images/sky.jpg');
+        this.load.image('bigSky', 'images/newSky.jpg');
 
-        this.load.image('V0', 'images/vocab balloons/V0.png');
-        this.load.image('V1', 'images/vocab balloons/V1.png');
-        this.load.image('V2', 'images/vocab balloons/V2.png');
-        this.load.image('V3', 'images/vocab balloons/V3.png');
-        this.load.image('V4', 'images/vocab balloons/V4.png');
+        this.load.image('V0', 'images/vocab balloons/apt.png');
+        this.load.image('V1', 'images/vocab balloons/knave.png');
+        this.load.image('V2', 'images/vocab balloons/conscience.png');
+        this.load.image('V3', 'images/vocab balloons/obliged.png');
+        this.load.image('V4', 'images/vocab balloons/promptly.png');
+        this.load.image('V5', 'images/vocab balloons/prose.png');
+        this.load.image('V6', 'images/vocab balloons/stockade.png');
+        this.load.image('V7', 'images/vocab balloons/tallow.png');
+        this.load.image('V8', 'images/vocab balloons/testy.png');
+        this.load.image('V9', 'images/vocab balloons/wharf.png');
 
         this.load.image('button1', 'images/ui/buttons/2/1.png');
         this.load.image('button2', 'images/ui/buttons/2/3.png');
@@ -23,9 +29,12 @@ class SceneMain extends Phaser.Scene {
 
     }
     create() {
-        this.background=this.add.image(0,0,'background');
-        this.background.setOrigin(0,0);
         
+        //this.background=this.add.image(0,0,'background');
+        //this.background.setOrigin(0,0);
+        this.bigSky = this.add.image(0,0, 'bigSky');
+        this.bigSky.setOrigin(0,0);
+
         emitter = new Phaser.Events.EventEmitter();  //should be first in create
         controller = new Controller();
 
@@ -41,7 +50,7 @@ class SceneMain extends Phaser.Scene {
 
         
         //Intiial word display setup
-        var textD = this.add.text(50, 550, definitions[curIndex], {fontFamily: "Doppio One", color : '#000000'});
+        var textD = this.add.text(50, 550,"Definition: " + definitions[curIndex], {fontFamily: "Doppio One", color : '#000000'});
         textD.setScale(1.2);
         curVocab = words[curIndex];
 
@@ -54,71 +63,97 @@ class SceneMain extends Phaser.Scene {
         textD = this.change(textD, definitions);
         */
     
+        console.log("Dimsension update");
 
-        //want random numbers for velocity set
+        
+        //set of 10 balloon creation
+        //in future may want to figure out a loop if possible to cleanup
 
         this.balloon0 = this.physics.add.sprite(100,200, 'V0');
-        this.balloon0.setScale(.3);
-        this.balloon0.body.setVelocity(50, 200);
+        this.balloon0.setScale(.4);
+        this.balloon0.body.setVelocity(Phaser.Math.Between(40, 90), Phaser.Math.Between(40, 90));
         this.balloon0.setCollideWorldBounds(true);
         this.balloon0.setBounce(1, 1);
         this.balloon0.setName(words[0]);
 
         this.balloon1 = this.physics.add.sprite(150,200, 'V1');
-        this.balloon1.setScale(.3);
-        this.balloon1.body.setVelocity(70, 100);
+        this.balloon1.setScale(.4);
+        this.balloon1.body.setVelocity(Phaser.Math.Between(40, 90), Phaser.Math.Between(40, 90));
         this.balloon1.setCollideWorldBounds(true);
         this.balloon1.setBounce(1, 1);
         this.balloon1.setName(words[1]);
 
         this.balloon2 = this.physics.add.sprite(200,200, 'V2');
-        this.balloon2.setScale(.3);
-        this.balloon2.body.setVelocity(100, 100);
+        this.balloon2.setScale(.4);
+        this.balloon2.body.setVelocity(Phaser.Math.Between(40, 90), Phaser.Math.Between(40, 90));
         this.balloon2.setCollideWorldBounds(true);
         this.balloon2.setBounce(1, 1);
         this.balloon2.setName(words[2]);
 
         this.balloon3 = this.physics.add.sprite(250,200, 'V3');
-        this.balloon3.setScale(.3);
-        this.balloon3.body.setVelocity(150, 80);
+        this.balloon3.setScale(.4);
+        this.balloon3.body.setVelocity(Phaser.Math.Between(40, 90), Phaser.Math.Between(40, 90));
         this.balloon3.setCollideWorldBounds(true);
         this.balloon3.setBounce(1, 1);
         this.balloon3.setName(words[3]);
 
         this.balloon4 = this.physics.add.sprite(300,200, 'V4');
-        this.balloon4.setScale(.3);
-        this.balloon4.body.setVelocity(80, 90);
+        this.balloon4.setScale(.4);
+        this.balloon4.body.setVelocity(Phaser.Math.Between(40, 90), Phaser.Math.Between(40, 90));
         this.balloon4.setCollideWorldBounds(true);
         this.balloon4.setBounce(1, 1);
         this.balloon4.setName(words[4]);
+        
+        this.balloon5 = this.physics.add.sprite(320,200, 'V5');
+        this.balloon5.setScale(.4);
+        this.balloon5.body.setVelocity(Phaser.Math.Between(40, 90), Phaser.Math.Between(40, 90));
+        this.balloon5.setCollideWorldBounds(true);
+        this.balloon5.setBounce(1, 1);
+        this.balloon5.setName(words[5]);
+        
+        this.balloon6 = this.physics.add.sprite(340,200, 'V6');
+        this.balloon6.setScale(.4);
+        this.balloon6.body.setVelocity(Phaser.Math.Between(40, 90), Phaser.Math.Between(40, 90));
+        this.balloon6.setCollideWorldBounds(true);
+        this.balloon6.setBounce(1, 1);
+        this.balloon6.setName(words[6]);
+        
+        this.balloon7 = this.physics.add.sprite(360,200, 'V7');
+        this.balloon7.setScale(.4);
+        this.balloon7.body.setVelocity(Phaser.Math.Between(40, 90), Phaser.Math.Between(40, 90));
+        this.balloon7.setCollideWorldBounds(true);
+        this.balloon7.setBounce(1, 1);
+        this.balloon7.setName(words[7]);
+        
+        this.balloon8 = this.physics.add.sprite(380,200, 'V8');
+        this.balloon8.setScale(.4);
+        this.balloon8.body.setVelocity(Phaser.Math.Between(40, 90), Phaser.Math.Between(40, 90));
+        this.balloon8.setCollideWorldBounds(true);
+        this.balloon8.setBounce(1, 1);
+        this.balloon8.setName(words[8]);
+        
+        this.balloon9 = this.physics.add.sprite(400,200, 'V9');
+        this.balloon9.setScale(.4);
+        this.balloon9.body.setVelocity(Phaser.Math.Between(40, 90), Phaser.Math.Between(40, 90));
+        this.balloon9.setCollideWorldBounds(true);
+        this.balloon9.setBounce(1, 1);
+        this.balloon9.setName(words[9]);
 
 
         this.pencil = this.physics.add.sprite(300,600, 'pencil');
-        this.pencil.setScale(.3);
+        this.pencil.setScale(.4);
         this.pencil.body.drag.set(250);
         this.pencil.body.maxVelocity.set(200);
         this.pencil.setCollideWorldBounds(true);
+
         
-        var arr = [this.balloon0, this.balloon1, this.balloon2, this.balloon3, this.balloon4];
+        
+        
 
-        /*
-        for(var i = 0; i <= 4; i++){
-            this.physics.add.collider(this.pencil, arr[i], function(pencil, balloon){
-                if (balloon.name == "jeff") { //change it to be cur def
-                    balloon.destroy();
-                  }
-                else { //reset location if incorrect
-                    this.balloon.setX(10);
-                    this.balloon.setY(20);
-                  }
-            }.bind(this));
-        }*/
-
-
+        var balloonBin = [this.balloon0,this.balloon1, this.balloon2,this.balloon3, this.balloon4, this.balloon5, this.balloon6, this.balloon7, this.balloon8, this.balloon9];
+        
         //Balloon pop mechanics
-        var balloonBin = [this.balloon0,this.balloon1, this.balloon2,this.balloon3, this.balloon4];
-        
-        for(var i = 0; i <= 4; i++ ){
+        for(var i = 0; i <= 9; i++ ){
             this.physics.add.collider(this.pencil, balloonBin[i], function(pencil, balloon){
                 if (balloon.name == curVocab) { //change it to be cur def
                     textD = this.change(textD);
@@ -131,8 +166,6 @@ class SceneMain extends Phaser.Scene {
                 }
             }.bind(this));
         }
-
-
         
 
 
@@ -147,20 +180,20 @@ class SceneMain extends Phaser.Scene {
         definitions[curIndex] = "";
         var counter = 0; //escape loop if array is empty
 
-        while(definitions[curIndex] == "" && counter < 5){
-            curIndex = Phaser.Math.Between(0, 4);
+        while(definitions[curIndex] == "" && counter < 10){
+            curIndex = Phaser.Math.Between(0, 9);
             console.log("Random Num Update To: " + curIndex);
             counter ++;
         }
 
-        if (counter < 5){
+        if (counter < 10){
         curVocab = words[curIndex];
         }
         else{ //all words used
             curVocab = "";
         }
 
-        var textHolder = this.add.text(50,550, "UPDATED: " + definitions[curIndex], {fontFamily: "Doppio One", color: '#000000'})
+        var textHolder = this.add.text(50,550, "Definition: " + definitions[curIndex], {fontFamily: "Doppio One", color: '#000000'})
         textHolder.setScale(1.2);
 
         return (textHolder);

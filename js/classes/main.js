@@ -12,8 +12,8 @@ window.onload=function()
 {
 	var config = {
         type: Phaser.AUTO,
-        width: 800,
-        height: 640,
+        width: 1000,
+        height: 650,
         parent: 'phaser-game',
         physics: {
             default: 'arcade',
@@ -27,8 +27,18 @@ window.onload=function()
     model = new Model();
     game = new Phaser.Game(config);
     curVocab = "curVocab";
-    words = ["cat", "mango", "avocado", "Santi", "Angela"];
-    definitions = ["A cute animal", "Sweet, exotic fruit", "Green fruit with a pit", "The bear", "The Grizz"];
+    words = ["apt", "knave", "conscience", "obliged", "promptly", "prose", "stockade", "tallow", "testy", "wharf"];
+    definitions = ["at risk of or subject to experiencing something", 
+                   "a deceitful and unreliable scoundrel", 
+                   "conformity to one's own sense of right conduct", 
+                   "having a moral duty to do something", 
+                   "with little or no delay", 
+                   "ordinary writing as distinguished from verse", 
+                   "fortification consisting of a fence set firmly for defense", 
+                   "a hard substance used for making soap and candles", 
+                   "easily irritated or annoyed",
+                   "a platform from the shore that provides access to ships"
+                ];
     curIndex = Phaser.Math.Between(0, 4);
 
 }
