@@ -11,6 +11,8 @@ class SceneMain extends Phaser.Scene {
         this.load.image('background', 'images/sky.jpg');
         this.load.image('bigSky', 'images/newSky.jpg');
 
+        this.load.image('testB', 'images/scribBalloon.png');
+
         this.load.image('V0', 'images/vocab balloons/apt.png');
         this.load.image('V1', 'images/vocab balloons/knave.png');
         this.load.image('V2', 'images/vocab balloons/conscience.png');
@@ -44,15 +46,24 @@ class SceneMain extends Phaser.Scene {
         //alignGrid.show();
         //alignGrid.showNumbers();
 
+        //SCORE BOX
+        this.sb=new ScoreBox({scene:this});
+        this.sb.x=game.config.width/2;
+        this.sb.y=50;
+
+        model.score = 0;
+        console.log("Ready Score!");
+
         
         //var words = ["cat", "mango", "avocado", "Santi", "Angela"];
         //var definitions = ["A cute animal", "Sweet, exotic fruit", "Green fruit with a pit", "The bear", "The Grizz"];//add one more for loop
 
         
         //Intiial word display setup
-        var textD = this.add.text(50, 550,"Definition: " + definitions[curIndex], {fontFamily: "Doppio One", color : '#000000'});
+        var textD = this.add.text(400, 600,"Definition: " + definitions[curIndex], {fontFamily: "Doppio One", color : '#000000'});
+        textD.setOrigin(0.5,0.5)
         textD.setScale(1.2);
-        curVocab = words[curIndex];
+        curVocab = words[curIndex]; 
 
 
         //Text format referance
@@ -63,11 +74,11 @@ class SceneMain extends Phaser.Scene {
         textD = this.change(textD, definitions);
         */
     
-        console.log("Dimsension update");
 
         
         //set of 10 balloon creation
         //in future may want to figure out a loop if possible to cleanup
+
 
         this.balloon0 = this.physics.add.sprite(100,200, 'V0');
         this.balloon0.setScale(.4);
@@ -140,7 +151,7 @@ class SceneMain extends Phaser.Scene {
         this.balloon9.setName(words[9]);
 
 
-        this.pencil = this.physics.add.sprite(300,600, 'pencil');
+        this.pencil = this.physics.add.sprite(100,600, 'pencil');
         this.pencil.setScale(.4);
         this.pencil.body.drag.set(250);
         this.pencil.body.maxVelocity.set(200);
@@ -155,14 +166,26 @@ class SceneMain extends Phaser.Scene {
         //Balloon pop mechanics
         for(var i = 0; i <= 9; i++ ){
             this.physics.add.collider(this.pencil, balloonBin[i], function(pencil, balloon){
+                
                 if (balloon.name == curVocab) { //change it to be cur def
                     textD = this.change(textD);
-                    console.log(this.textD);
                     balloon.destroy();
+                    model.score += 10;
+                    console.log("curVocab: "+ curVocab)
+                    for(var x = 0; x < 10; x++){//delays to avoid crash
+                        console.log(definitions[x] + "*");
+                    }
                 }
                 else { //reset location if incorrect
+                    console.log("curVocab: "+ curVocab)
                     balloon.setX(Phaser.Math.Between(20, 750));
                     balloon.setY(Phaser.Math.Between(20, 600));
+                    if(model.score > 0){
+                    model.score -= 5;
+                    for(var x = 0; x < 10; x++){//delays to avoid crash
+                        console.log(definitions[x] + "*");
+                    }
+                    }
                 }
             }.bind(this));
         }
@@ -182,10 +205,9 @@ class SceneMain extends Phaser.Scene {
 
         while(definitions[curIndex] == "" && counter < 10){
             curIndex = Phaser.Math.Between(0, 9);
-            console.log("Random Num Update To: " + curIndex);
             counter ++;
         }
-
+        
         if (counter < 10){
         curVocab = words[curIndex];
         }
@@ -193,8 +215,10 @@ class SceneMain extends Phaser.Scene {
             curVocab = "";
         }
 
-        var textHolder = this.add.text(50,550, "Definition: " + definitions[curIndex], {fontFamily: "Doppio One", color: '#000000'})
+        var textHolder = this.add.text(400,600, "Definition: " + definitions[curIndex], {fontFamily: "Doppio One", color: '#000000'})
+        textHolder.setOrigin(0.5,0.5)
         textHolder.setScale(1.2);
+
 
         return (textHolder);
     }
@@ -217,13 +241,13 @@ class SceneMain extends Phaser.Scene {
             this.pencil.rotation += 0.1;
         }
         if (this.cursors.up.isDown) {
-          console.log("key presssed");
+          //console.log("key presssed");
           this.physics.velocityFromRotation(this.pencil.rotation - Math.PI/2, 200, this.pencil.body.acceleration);
         }
         else {
           this.pencil.body.acceleration.set(0);
         }
-
+        
         //console.log(this.curWord);
 
     }
