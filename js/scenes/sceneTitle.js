@@ -4,7 +4,8 @@ class SceneTitle extends Phaser.Scene {
     }
     preload()
     {
-    	this.load.image('title','images/title.png');
+        this.load.image('bigSky', 'images/newSky.jpg');
+    	this.load.image('title','images/PPV Title.png');
         this.load.image('button1', 'images/ui/buttons/2/1.png');
     }
     create() {
@@ -14,10 +15,14 @@ class SceneTitle extends Phaser.Scene {
        emitter = new Phaser.Events.EventEmitter();  //should be first in create
        controller = new Controller();
 
+        this.bigSky = this.add.image(0,0, 'bigSky');
+        this.bigSky.setOrigin(0,0);
+
         this.alignGrid=new AlignGrid({rows:11, cols:11, scene:this});
         //this.alignGrid.showNumbers();
         //this.alignGrid.show();
 
+        //var title = this.add.image(0,0, 'title');
         var title = this.add.image(0,0, 'title');
         Align.scaleToGameW(title,.8);
         this.alignGrid.placeAtIndex(38,title);

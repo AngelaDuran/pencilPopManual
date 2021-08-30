@@ -205,15 +205,17 @@ class SceneMain extends Phaser.Scene {
         definitions.splice(curIndex, 1);
         words.splice(curIndex, 1);
 
-        if(definitions != undefined || definitions.length != 0){
-            curIndex = Phaser.Math.Between(0, definitions.length-1);
-            curVocab = words[curIndex];
+        if(definitions === undefined || definitions.length == 0){
+            //curVocab = "";
+            console.log("All words used: UPDATED ENDGAME!!!");
+            this.scene.start("SceneOver");
+            return;
+            
             
         }
         else{
-            //curVocab = "";
-            console.log("All words used: UPDATED ENDGAME");
-            emitter.on('end_game', this.endGame, this);
+            curIndex = Phaser.Math.Between(0, definitions.length-1);
+            curVocab = words[curIndex];
         }
 
         //want to be able to exit the game for last part if it gets here
@@ -226,9 +228,7 @@ class SceneMain extends Phaser.Scene {
 
     }
 
-    endGame(){
-        this.scene.start('SceneOver');
-    }
+
 
 /*
     buttonPressed(params){

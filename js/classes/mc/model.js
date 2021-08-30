@@ -17,7 +17,6 @@ class Model{
 
     set score(val){
         this._score = val;
-        console.log("score updated");
         emitter.emit(G.SCORE_UPDATED);
     }
 
