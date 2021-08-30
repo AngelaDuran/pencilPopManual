@@ -7,6 +7,7 @@ var curVocab;
 var words;
 var definitions;
 var curIndex;
+//var gameOver;
 
 window.onload=function()
 {
@@ -26,6 +27,7 @@ window.onload=function()
     G = new Constants();
     model = new Model();
     game = new Phaser.Game(config);
+    //gameOver = 0;
     curVocab = "curVocab";
     words = ["apt", "knave", "conscience", "obliged", "promptly", "prose", "stockade", "tallow", "testy", "wharf"];
     definitions = ["at risk of or subject to experiencing something", 

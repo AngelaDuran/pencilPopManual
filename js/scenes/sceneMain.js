@@ -171,20 +171,23 @@ class SceneMain extends Phaser.Scene {
                     textD = this.change(textD);
                     balloon.destroy();
                     model.score += 10;
+                    /*
                     console.log("curVocab: "+ curVocab)
                     for(var x = 0; x < 10; x++){//delays to avoid crash
                         console.log(definitions[x] + "*");
-                    }
+                    }*/
                 }
                 else { //reset location if incorrect
-                    console.log("curVocab: "+ curVocab)
+                    
                     balloon.setX(Phaser.Math.Between(20, 750));
                     balloon.setY(Phaser.Math.Between(20, 600));
                     if(model.score > 0){
                     model.score -= 5;
+                    /*
+                    console.log("curVocab: "+ curVocab)
                     for(var x = 0; x < 10; x++){//delays to avoid crash
                         console.log(definitions[x] + "*");
-                    }
+                    }*/
                     }
                 }
             }.bind(this));
@@ -198,31 +201,34 @@ class SceneMain extends Phaser.Scene {
 
 
     change(textD){
-
         textD.destroy();
-        definitions[curIndex] = "";
-        var counter = 0; //escape loop if array is empty
+        definitions.splice(curIndex, 1);
+        words.splice(curIndex, 1);
 
-        while(definitions[curIndex] == "" && counter < 10){
-            curIndex = Phaser.Math.Between(0, 9);
-            counter ++;
+        if(definitions != undefined || definitions.length != 0){
+            curIndex = Phaser.Math.Between(0, definitions.length-1);
+            curVocab = words[curIndex];
+            
         }
-        
-        if (counter < 10){
-        curVocab = words[curIndex];
-        }
-        else{ //all words used
-            curVocab = "";
+        else{
+            //curVocab = "";
+            console.log("All words used: UPDATED ENDGAME");
+            emitter.on('end_game', this.endGame, this);
         }
 
+        //want to be able to exit the game for last part if it gets here
         var textHolder = this.add.text(400,600, "Definition: " + definitions[curIndex], {fontFamily: "Doppio One", color: '#000000'})
         textHolder.setOrigin(0.5,0.5)
         textHolder.setScale(1.2);
 
 
         return (textHolder);
+
     }
 
+    endGame(){
+        this.scene.start('SceneOver');
+    }
 
 /*
     buttonPressed(params){
@@ -247,6 +253,7 @@ class SceneMain extends Phaser.Scene {
         else {
           this.pencil.body.acceleration.set(0);
         }
+        
         
         //console.log(this.curWord);
 
