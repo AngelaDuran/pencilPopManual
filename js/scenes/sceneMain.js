@@ -158,6 +158,8 @@ class SceneMain extends Phaser.Scene {
         this.pencil.setCollideWorldBounds(true);
 
         
+        //TAKE OUT LATER
+        this.scene.start("SceneOver");
         
         
 
