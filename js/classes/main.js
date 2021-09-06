@@ -22,7 +22,7 @@ window.onload=function()
                 debug: false
             }
         },
-        scene: [SceneTitle, SceneMain, SceneOver]
+        scene: [SceneLoad, SceneTitle, SceneMain, SceneOver]
     };
     G = new Constants();
     model = new Model();

@@ -4,6 +4,7 @@ class SceneMain extends Phaser.Scene {
     }
     preload()
     {
+        /*
     	//load our images or sounds 
         this.load.image('bee', 'images/bee.png');
         this.load.image('pencil', 'images/pencilOutlined.png');
@@ -29,17 +30,19 @@ class SceneMain extends Phaser.Scene {
         //this.load.audio('backgroundMusic', ['audio/background.mp3', 'audio/background.ogg']);
         this.load.audio('pop', 'audio/pop3.mp3');
         this.load.audio('backgroundMusic', 'audio/SOSOtrim.mp3');
+        */
 
     }
     create() {
         emitter = new Phaser.Events.EventEmitter();  //should be first in create
         controller = new Controller();
-        var mediaManager = new MediaManager({scene:this});
-        mediaManager.setBackgroundMusic('backgroundMusic');
 
         //background setting
         this.bigSky = this.add.image(0,0, 'bigSky');
         this.bigSky.setOrigin(0,0);
+
+        var mediaManager = new MediaManager({scene:this});
+        mediaManager.setBackgroundMusic('backgroundMusic');
         
 
         //CODING THE PENCIL POP GAME 8/10
@@ -208,6 +211,8 @@ class SceneMain extends Phaser.Scene {
         return (textHolder);
 
     }
+
+
 
 
     update() {

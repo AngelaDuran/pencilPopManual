@@ -29,6 +29,13 @@ class SceneTitle extends Phaser.Scene {
         var btnStart = new FlatButton({scene:this, key:'button1', text:'start', event:'start_game'});
         this.alignGrid.placeAtIndex(93,btnStart);
 
+        this.keyboard = this.add.image(580,580, 'keyboard');
+        this.keyboard.setScale(.65);
+
+        var keyText = this.add.text(370, 580,"Play the game using these arrow keys", {fontFamily: "Doppio One", color : '#000000'});
+        keyText.setOrigin(0.5,0.5)
+        keyText.setScale(1.2);
+
         emitter.on('start_game', this.startGame, this);        
 
     }
