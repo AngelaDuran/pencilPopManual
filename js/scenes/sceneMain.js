@@ -11,7 +11,6 @@ class SceneMain extends Phaser.Scene {
         this.load.image('background', 'images/sky.jpg');
         this.load.image('bigSky', 'images/newSky.jpg');
 
-        this.load.image('testB', 'images/scribBalloon.png');
 
         this.load.image('V0', 'images/vocab balloons/apt.png');
         this.load.image('V1', 'images/vocab balloons/knave.png');
@@ -28,17 +27,20 @@ class SceneMain extends Phaser.Scene {
         this.load.image('button2', 'images/ui/buttons/2/3.png');
         //this.load.audio('cat', ['audio/meow.mp3', 'audio/meow.ogg']);
         //this.load.audio('backgroundMusic', ['audio/background.mp3', 'audio/background.ogg']);
+        this.load.audio('pop', 'audio/pop3.mp3');
+        this.load.audio('backgroundMusic', 'audio/SOSOtrim.mp3');
 
     }
     create() {
-        
-        //this.background=this.add.image(0,0,'background');
-        //this.background.setOrigin(0,0);
-        this.bigSky = this.add.image(0,0, 'bigSky');
-        this.bigSky.setOrigin(0,0);
-
         emitter = new Phaser.Events.EventEmitter();  //should be first in create
         controller = new Controller();
+        var mediaManager = new MediaManager({scene:this});
+        mediaManager.setBackgroundMusic('backgroundMusic');
+
+        //background setting
+        this.bigSky = this.add.image(0,0, 'bigSky');
+        this.bigSky.setOrigin(0,0);
+        
 
         //CODING THE PENCIL POP GAME 8/10
         var gridConfig={rows:8, cols:10, scene:this};
@@ -64,16 +66,6 @@ class SceneMain extends Phaser.Scene {
         textD.setOrigin(0.5,0.5)
         textD.setScale(1.2);
         curVocab = words[curIndex]; 
-
-
-        //Text format referance
-        /*
-        //this.changeDef(definitions);
-        var textD = this.add.text(50, 300, "Def GLOBAL", {color : '#f7fc53'});
-        //textD.destroy();
-        textD = this.change(textD, definitions);
-        */
-    
 
         
         //set of 10 balloon creation
@@ -156,11 +148,6 @@ class SceneMain extends Phaser.Scene {
         this.pencil.body.drag.set(250);
         this.pencil.body.maxVelocity.set(200);
         this.pencil.setCollideWorldBounds(true);
-
-        
-        //TAKE OUT LATER
-        this.scene.start("SceneOver");
-        
         
 
         var balloonBin = [this.balloon0,this.balloon1, this.balloon2,this.balloon3, this.balloon4, this.balloon5, this.balloon6, this.balloon7, this.balloon8, this.balloon9];
@@ -172,12 +159,8 @@ class SceneMain extends Phaser.Scene {
                 if (balloon.name == curVocab) { //change it to be cur def
                     textD = this.change(textD);
                     balloon.destroy();
+                    emitter.emit(G.PLAY_SOUND, 'pop');
                     model.score += 10;
-                    /*
-                    console.log("curVocab: "+ curVocab)
-                    for(var x = 0; x < 10; x++){//delays to avoid crash
-                        console.log(definitions[x] + "*");
-                    }*/
                 }
                 else { //reset location if incorrect
                     
@@ -185,11 +168,7 @@ class SceneMain extends Phaser.Scene {
                     balloon.setY(Phaser.Math.Between(20, 600));
                     if(model.score > 0){
                     model.score -= 5;
-                    /*
-                    console.log("curVocab: "+ curVocab)
-                    for(var x = 0; x < 10; x++){//delays to avoid crash
-                        console.log(definitions[x] + "*");
-                    }*/
+
                     }
                 }
             }.bind(this));
@@ -230,15 +209,6 @@ class SceneMain extends Phaser.Scene {
 
     }
 
-
-
-/*
-    buttonPressed(params){
-        console.log(params);
-        var switched = !model.musicOn;
-        model.musicOn = switched;
-    }
-    */
 
     update() {
         //constant running loop
