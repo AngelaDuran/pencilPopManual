@@ -33,11 +33,6 @@ class SceneMain extends Phaser.Scene {
 
         model.score = 0;
         console.log("Ready Score!");
-
-        
-        //var words = ["cat", "mango", "avocado", "Santi", "Angela"];
-        //var definitions = ["A cute animal", "Sweet, exotic fruit", "Green fruit with a pit", "The bear", "The Grizz"];//add one more for loop
-
         
         //Intiial word display setup
         var textD = this.add.text(400, 600,"Definition: " + definitions[curIndex], {fontFamily: "Doppio One", color : '#000000'});
@@ -48,8 +43,6 @@ class SceneMain extends Phaser.Scene {
         
         //set of 10 balloon creation
         //in future may want to figure out a loop if possible to cleanup
-
-
         this.balloon0 = this.physics.add.sprite(100,200, 'V0');
         this.balloon0.setScale(.4);
         this.balloon0.body.setVelocity(Phaser.Math.Between(40, 90), Phaser.Math.Between(40, 90));
@@ -151,8 +144,6 @@ class SceneMain extends Phaser.Scene {
                 }
             }.bind(this));
         }
-        
-
 
         this.cursors = this.input.keyboard.createCursorKeys();
 

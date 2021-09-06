@@ -23,6 +23,7 @@ class SceneLoad extends Phaser.Scene {
         this.load.image('balloon', 'images/balloonG.png');
         this.load.image('bigSky', 'images/newSky.jpg');
 
+        //load all the vocab balloons
         this.load.image('V0', 'images/vocab balloons/apt.png');
         this.load.image('V1', 'images/vocab balloons/knave.png');
         this.load.image('V2', 'images/vocab balloons/conscience.png');
@@ -34,6 +35,7 @@ class SceneLoad extends Phaser.Scene {
         this.load.image('V8', 'images/vocab balloons/testy.png');
         this.load.image('V9', 'images/vocab balloons/wharf.png');
 
+        //loading UI components
         this.load.image('button1', 'images/ui/buttons/2/1.png');
         this.load.image('button2', 'images/ui/buttons/2/3.png');
         this.load.audio('pop', 'audio/pop3.mp3');
