@@ -4,33 +4,8 @@ class SceneMain extends Phaser.Scene {
     }
     preload()
     {
-        /*
-    	//load our images or sounds 
-        this.load.image('bee', 'images/bee.png');
-        this.load.image('pencil', 'images/pencilOutlined.png');
-        this.load.image('balloon', 'images/balloonG.png');
-        this.load.image('background', 'images/sky.jpg');
-        this.load.image('bigSky', 'images/newSky.jpg');
 
-
-        this.load.image('V0', 'images/vocab balloons/apt.png');
-        this.load.image('V1', 'images/vocab balloons/knave.png');
-        this.load.image('V2', 'images/vocab balloons/conscience.png');
-        this.load.image('V3', 'images/vocab balloons/obliged.png');
-        this.load.image('V4', 'images/vocab balloons/promptly.png');
-        this.load.image('V5', 'images/vocab balloons/prose.png');
-        this.load.image('V6', 'images/vocab balloons/stockade.png');
-        this.load.image('V7', 'images/vocab balloons/tallow.png');
-        this.load.image('V8', 'images/vocab balloons/testy.png');
-        this.load.image('V9', 'images/vocab balloons/wharf.png');
-
-        this.load.image('button1', 'images/ui/buttons/2/1.png');
-        this.load.image('button2', 'images/ui/buttons/2/3.png');
-        //this.load.audio('cat', ['audio/meow.mp3', 'audio/meow.ogg']);
-        //this.load.audio('backgroundMusic', ['audio/background.mp3', 'audio/background.ogg']);
-        this.load.audio('pop', 'audio/pop3.mp3');
-        this.load.audio('backgroundMusic', 'audio/SOSOtrim.mp3');
-        */
+        //all loaded in sceneLoad
 
     }
     create() {
@@ -190,7 +165,6 @@ class SceneMain extends Phaser.Scene {
         words.splice(curIndex, 1);
 
         if(definitions === undefined || definitions.length == 0){
-            //curVocab = "";
             console.log("All words used: UPDATED ENDGAME!!!");
             this.scene.start("SceneOver");
             return;
@@ -224,15 +198,12 @@ class SceneMain extends Phaser.Scene {
             this.pencil.rotation += 0.1;
         }
         if (this.cursors.up.isDown) {
-          //console.log("key presssed");
           this.physics.velocityFromRotation(this.pencil.rotation - Math.PI/2, 200, this.pencil.body.acceleration);
         }
         else {
           this.pencil.body.acceleration.set(0);
         }
         
-        
-        //console.log(this.curWord);
 
     }
     //can put custom functions after (TEST)
