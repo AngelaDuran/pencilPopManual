@@ -1,3 +1,10 @@
+/*
+Background Music by Wavecont, https://www.wavecont.com/free-download/
+Licensed under creative commons Attribution-ShareAlike 4.0 International
+https://creativecommons.org/licenses/by-sa/4.0/
+Music promoted by https://www.chosic.com/
+*/
+
 class SceneLoad extends Phaser.Scene {
     constructor() {
         super('SceneLoad');
@@ -39,7 +46,7 @@ class SceneLoad extends Phaser.Scene {
         this.load.image('button1', 'images/ui/buttons/2/1.png');
         this.load.image('button2', 'images/ui/buttons/2/3.png');
         this.load.audio('pop', 'audio/pop3.mp3');
-        this.load.audio('backgroundMusic', 'audio/SOSOtrim.mp3');
+        this.load.audio('backgroundMusic', 'audio/Inspire.mp3');
     }
 
     onProgress(value){
