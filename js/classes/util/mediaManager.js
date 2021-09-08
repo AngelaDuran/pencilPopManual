@@ -21,7 +21,7 @@ class MediaManager{
                     this.background.stop();
                     console.log("Music stop");
                 }
-                //console.log("musicOn val after first if: " + model.musicOn);
+                
                 if(model.musicOn == true){
                     this.background.play();
                     console.log("Music play");

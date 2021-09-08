@@ -9,6 +9,7 @@ class SceneMain extends Phaser.Scene {
 
     }
     create() {
+        //when scene is called again, this will run
         emitter = new Phaser.Events.EventEmitter();  //should be first in create
         controller = new Controller();
 
@@ -17,8 +18,8 @@ class SceneMain extends Phaser.Scene {
         this.bigSky.setOrigin(0,0);
 
         var mediaManager = new MediaManager({scene:this});
-        mediaManager.setBackgroundMusic('backgroundMusic');
-        
+        mediaManager.setBackgroundMusic('backgroundMusic');  
+        model.musicOn = true;      
 
         //CODING THE PENCIL POP GAME 8/10
         var gridConfig={rows:8, cols:10, scene:this};
@@ -33,9 +34,13 @@ class SceneMain extends Phaser.Scene {
 
         model.score = 0;
         console.log("Ready Score!");
+
+        var curDef = [...definitions];
+        console.log("... update");
+        
         
         //Intiial word display setup
-        var textD = this.add.text(400, 600,"Definition: " + definitions[curIndex], {fontFamily: "Doppio One", color : '#000000'});
+        var textD = this.add.text(400, 600,"Definition: " + curDef[curIndex], {fontFamily: "Doppio One", color : '#000000'});
         textD.setOrigin(0.5,0.5)
         textD.setScale(1.2);
         curVocab = words[curIndex]; 
@@ -119,6 +124,8 @@ class SceneMain extends Phaser.Scene {
         this.pencil.body.drag.set(250);
         this.pencil.body.maxVelocity.set(200);
         this.pencil.setCollideWorldBounds(true);
+
+        var wordCur = [...words];
         
 
         var balloonBin = [this.balloon0,this.balloon1, this.balloon2,this.balloon3, this.balloon4, this.balloon5, this.balloon6, this.balloon7, this.balloon8, this.balloon9];
@@ -128,7 +135,7 @@ class SceneMain extends Phaser.Scene {
             this.physics.add.collider(this.pencil, balloonBin[i], function(pencil, balloon){
                 
                 if (balloon.name == curVocab) { //change it to be cur def
-                    textD = this.change(textD);
+                    textD = this.change(textD, curDef, wordCur);
                     balloon.destroy();
                     emitter.emit(G.PLAY_SOUND, 'pop');
                     model.score += 10;
@@ -150,12 +157,12 @@ class SceneMain extends Phaser.Scene {
     }
 
 
-    change(textD){
+    change(textD, curDef, wordCur){
         textD.destroy();
-        definitions.splice(curIndex, 1);
-        words.splice(curIndex, 1);
+        curDef.splice(curIndex, 1);
+        wordCur.splice(curIndex, 1);
 
-        if(definitions === undefined || definitions.length == 0){
+        if(curDef === undefined || curDef.length == 0){
             console.log("All words used: UPDATED ENDGAME!!!");
             this.scene.start("SceneOver");
             return;
@@ -163,12 +170,12 @@ class SceneMain extends Phaser.Scene {
             
         }
         else{
-            curIndex = Phaser.Math.Between(0, definitions.length-1);
-            curVocab = words[curIndex];
+            curIndex = Phaser.Math.Between(0, curDef.length-1);
+            curVocab = wordCur[curIndex];
         }
 
         //want to be able to exit the game for last part if it gets here
-        var textHolder = this.add.text(400,600, "Definition: " + definitions[curIndex], {fontFamily: "Doppio One", color: '#000000'})
+        var textHolder = this.add.text(400,600, "Definition: " + curDef[curIndex], {fontFamily: "Doppio One", color: '#000000'})
         textHolder.setOrigin(0.5,0.5)
         textHolder.setScale(1.2);
 

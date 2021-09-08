@@ -17,8 +17,6 @@ class SceneOver extends Phaser.Scene {
         this.alignGrid=new AlignGrid({rows:11, cols:11, scene:this});
         //this.alignGrid.showNumbers();
         //this.alignGrid.show();
-
-        console.log("Game over updated");
         
         //score text
         var textScore = this.add.text(400, 320,"Final Score: " + model.score, {fontFamily: "Doppio One", color : '#000000'});
@@ -36,6 +34,7 @@ class SceneOver extends Phaser.Scene {
     }
 
     startGame(){
+        model.musicOn = false;
         this.scene.start('SceneMain');
     }
     update() {}
