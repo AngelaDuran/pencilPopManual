@@ -20,7 +20,7 @@ class SceneTitle extends Phaser.Scene {
 
         this.alignGrid=new AlignGrid({rows:11, cols:11, scene:this});
         //this.alignGrid.showNumbers();
-        //this.alignGrid.show();
+        //this.alignGrid.show(); 
 
         var title = this.add.image(0,0, 'title');
         Align.scaleToGameW(title,.8);

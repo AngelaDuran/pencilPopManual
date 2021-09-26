@@ -7,7 +7,7 @@ class ToggleButton extends Phaser.GameObjects.Container{
         this.onIcon=this.scene.add.image(0,0,config.onIcon);
         this.offIcon=this.scene.add.image(0,0,config.offIcon);
 
-        Align.scaleToGameW(this.back, .1);
+        Align.scaleToGameW(this.back, .1); //May want to change size scaling
         Align.scaleToGameW(this.onIcon, .05);
         Align.scaleToGameW(this.offIcon, .05);
 

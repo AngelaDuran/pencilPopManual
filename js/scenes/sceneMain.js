@@ -4,9 +4,9 @@ class SceneMain extends Phaser.Scene {
     }
     preload()
     {
-
         //all loaded in sceneLoad
-
+        console.log("check debugger");
+        
     }
     create() {
         //when scene is called again, this will run
@@ -17,9 +17,10 @@ class SceneMain extends Phaser.Scene {
         this.bigSky = this.add.image(0,0, 'bigSky');
         this.bigSky.setOrigin(0,0);
 
+        model.musicOn = true;
         var mediaManager = new MediaManager({scene:this});
-        mediaManager.setBackgroundMusic('backgroundMusic');  
-        model.musicOn = true;      
+        mediaManager.setBackgroundMusic('backgroundMusic');
+
 
         //CODING THE PENCIL POP GAME 8/10
         var gridConfig={rows:8, cols:10, scene:this};

@@ -25,7 +25,6 @@ class SceneLoad extends Phaser.Scene {
         //load our images or sounds 
         this.load.image('keyboard', 'images/keyboard2.png');
 
-        this.load.image('bee', 'images/bee.png');
         this.load.image('pencil', 'images/pencilOutlined.png');
         this.load.image('balloon', 'images/balloonG.png');
         this.load.image('bigSky', 'images/newSky.jpg');
@@ -47,6 +46,13 @@ class SceneLoad extends Phaser.Scene {
         this.load.image('button2', 'images/ui/buttons/2/3.png');
         this.load.audio('pop', 'audio/pop3.mp3');
         this.load.audio('backgroundMusic', 'audio/Inspire.mp3');
+
+        //sound toggles
+        this.load.image('toggleBack', 'images/ui/toggles/1.png');
+        this.load.image('sfxOff', 'images/ui/icons/sfx_off.png');
+        this.load.image('sfxOn', 'images/ui/icons/sfx_on.png');
+        this.load.image('musicOff', 'images/ui/icons/music_off.png');
+        this.load.image('musicOn', 'images/ui/icons/music_on.png');
     }
 
     onProgress(value){

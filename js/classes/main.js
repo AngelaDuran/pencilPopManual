@@ -43,4 +43,5 @@ window.onload=function()
                 ];
     curIndex = Phaser.Math.Between(0, 4);
 
+
 }
